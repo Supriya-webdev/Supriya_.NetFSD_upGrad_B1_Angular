@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Banking Account Opening</title>
+</head>
+
+<body>
+
+<header align="center">
+    <h1>SecureBank Online Account Opening</h1>
+</header>
+
+<main>
+
+<section>
+    <h2>Customer Details</h2>
+
+    <form>
+
+        <table border="1" cellpadding="8">
+
+            <tr>
+                <td>Full Name</td>
+                <td>
+                    <input type="text" required placeholder="Enter your full name">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Email</td>
+                <td>
+                    <input type="email" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Phone Number</td>
+                <td>
+                    <input type="tel" pattern="[0-9]{10}" placeholder="10 digit number" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>PAN Number</td>
+                <td>
+                    <input type="text"
+                           pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
+                           placeholder="ABCDE1234F"
+                           required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>IFSC Code</td>
+                <td>
+                    <input type="text"
+                           pattern="[A-Za-z]{4}[0-9]{7}"
+                           placeholder="SBIN0001234"
+                           required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Account Type</td>
+                <td>
+                    <input list="accType" required placeholder="Choose account type">
+                    <datalist id="accType">
+                        <option value="Savings Account">
+                        <option value="Salary Account">
+                        <option value="Student Account">
+                        <option value="Senior Citizen Account">
+                    </datalist>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Date of Birth</td>
+                <td>
+                    <input type="date" max="2008-01-01" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Monthly Income</td>
+                <td>
+                    <input type="number" step="1000" min="0" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Upload ID Proof</td>
+                <td>
+                    <input type="file" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Open Account">
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+
+</section>
+
+</main>
+
+<footer align="center">
+    <p>© 2026 SecureBank</p>
+</footer>
+
+</body>
+</html>
