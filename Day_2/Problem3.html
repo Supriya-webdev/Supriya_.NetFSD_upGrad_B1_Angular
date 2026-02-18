@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Learning Course Registration</title>
+</head>
+
+<body>
+
+<header align="center">
+    <h1>SkillBoost Academy</h1>
+    <nav>
+        <a href="#">Home</a> |
+        <a href="#">Courses</a> |
+        <a href="#">Register</a> |
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<main>
+
+<section>
+    <h2>Course Introduction</h2>
+
+    <video controls width="500">
+        <source src="Images\1422633-hd_1920_810_24fps.mp4" type="video/mp4">
+    </video>
+</section>
+
+<section>
+    <h2>Course Registration Form</h2>
+
+    <p>Enrollment Progress:</p>
+    <progress value="30" max="100"></progress>
+    <br><br>
+
+    <form>
+
+        <table border="1" cellpadding="8">
+
+            <tr>
+                <td>Select Course</td>
+                <td>
+                    <input list="courseList" required placeholder="Type course name">
+                    <datalist id="courseList">
+                        <option value="Full Stack Web Development">
+                        <option value="Data Science Certification">
+                        <option value="Cloud Computing">
+                        <option value="UI/UX Design">
+                    </datalist>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Batch Month</td>
+                <td><input type="month" required></td>
+            </tr>
+
+            <tr>
+                <td>Preferred Session Timing</td>
+                <td><input type="time" required></td>
+            </tr>
+
+            <tr>
+                <td>Skill Level</td>
+                <td>
+                    Beginner
+                    <input type="range" min="1" max="10" value="5">
+                    Expert
+                </td>
+            </tr>
+
+            <tr>
+                <td>Name</td>
+                <td><input type="text" required></td>
+            </tr>
+
+            <tr>
+                <td>Email</td>
+                <td><input type="email" required></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Enroll Now">
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+
+</section>
+
+</main>
+
+<footer align="center">
+    <p>© 2026 SkillBoost Academy</p>
+</footer>
+
+</body>
+</html>
