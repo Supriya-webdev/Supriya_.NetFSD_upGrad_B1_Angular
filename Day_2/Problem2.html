@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hospital Appointment Booking</title>
+</head>
+
+<body>
+
+<h1 align="center">CityCare Hospital</h1>
+
+<nav align="center">
+    <a href="#">Home</a> |
+    <a href="#">Departments</a> |
+    <a href="#">Doctors</a> |
+    <a href="#">Contact</a>
+</nav>
+
+<h2>Book an Appointment</h2>
+
+<form>
+
+<table border="1" cellpadding="8">
+
+<tr>
+<td>Department:</td>
+<td>
+<input list="deptList" placeholder="Type department" required>
+<datalist id="deptList">
+<option value="Cardiology">
+<option value="Neurology">
+<option value="Orthopedics">
+<option value="Pediatrics">
+<option value="Dermatology">
+</datalist>
+</td>
+</tr>
+
+<tr>
+<td>Preferred Doctor:</td>
+<td>
+<input list="doctorList" placeholder="Type or choose doctor" required>
+<datalist id="doctorList">
+<option value="Dr. Sharma">
+<option value="Dr. Reddy">
+<option value="Dr. Mehta">
+<option value="Dr. Khan">
+</datalist>
+</td>
+</tr>
+
+<tr>
+<td>Appointment Date:</td>
+<td><input type="date" min="2026-01-01" required></td>
+</tr>
+
+<tr>
+<td>Age:</td>
+<td><input type="number" min="0" max="120" required></td>
+</tr>
+
+<tr>
+<td>Phone Number:</td>
+<td><input type="tel" pattern="[0-9]{10}" placeholder="10 digit number" required></td>
+</tr>
+
+<tr>
+<td>Email:</td>
+<td><input type="email" required></td>
+</tr>
+
+<tr>
+<td>Upload Medical Reports:</td>
+<td><input type="file" multiple></td>
+</tr>
+
+<tr>
+<td>Emergency Case:</td>
+<td>
+<input type="checkbox" id="emergency"> Yes
+</td>
+</tr>
+
+<tr>
+<td>Appointment Time:</td>
+<td><input type="time" required></td>
+</tr>
+
+<tr>
+<td>Address:</td>
+<td><textarea rows="3" cols="30" required></textarea></td>
+</tr>
+
+<tr>
+<td colspan="2" align="center">
+<input type="submit" value="Book Appointment">
+</td>
+</tr>
+
+</table>
+
+</form>
+
+<footer align="center">
+<p>CityCare Hospital | Emergency: +91 98765 12345</p>
+</footer>
+
+</body>
+</html>
