@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Booking Platform</title>
+</head>
+
+<body>
+
+<header align="center">
+    <h1>SkyWay Travel Booking</h1>
+    <nav>
+        <a href="#">Home</a> |
+        <a href="#">Packages</a> |
+        <a href="#">Booking</a> |
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<main>
+
+<section>
+    <h2>Explore the World</h2>
+    <video controls width="500">
+        <source src="Images\7043150-hd_1920_1080_30fps.mp4" type="video/mp4">
+        Your browser does not support video.
+    </video>
+</section>
+
+<section>
+    <h2>Travel Theme Audio</h2>
+    <audio controls>
+        <source src="Images\nastelbom-travel-463381.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+</section>
+
+<section>
+    <h2>Book Your Journey</h2>
+
+    <form>
+
+        <table border="1" cellpadding="8">
+
+            <tr>
+                <td>Source City</td>
+                <td>
+                    <input list="cities" required placeholder="Enter departure city">
+                    <datalist id="cities">
+                        <option value="Bangalore">
+                        <option value="Hyderabad">
+                        <option value="Delhi">
+                        <option value="Mumbai">
+                        <option value="Chennai">
+                    </datalist>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Destination City</td>
+                <td>
+                    <input list="cities" required placeholder="Enter destination city">
+                </td>
+            </tr>
+
+            <tr>
+                <td>Departure Date</td>
+                <td>
+                    <input type="date" id="depart" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Return Date</td>
+                <td>
+                    <input type="date" id="return" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Travel Class</td>
+                <td>
+                    <select required>
+                        <option value="">Select class</option>
+                        <option>Economy</option>
+                        <option>Premium Economy</option>
+                        <option>Business</option>
+                        <option>First Class</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Preferred Airline</td>
+                <td>
+                    <input list="airlines" placeholder="Type or choose airline">
+                    <datalist id="airlines">
+                        <option value="IndiGo">
+                        <option value="Air India">
+                        <option value="Vistara">
+                        <option value="Emirates">
+                    </datalist>
+                </td>
+            </tr>
+
+            <tr>
+                <td>No. of Passengers</td>
+                <td>
+                    <input type="number" min="1" max="10" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Meal Preference Tag Color</td>
+                <td>
+                    <input type="color" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Special Assistance</td>
+                <td>
+                    <textarea placeholder="Wheelchair, infant travel, medical needs, etc." rows="3"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Book Trip">
+                </td>
+            </tr>
+
+        </table>
+
+    </form>
+
+</section>
+
+</main>
+
+<footer align="center">
+    <p>© 2026 SkyWay Travels</p>
+</footer>
+
+</body>
+</html>
