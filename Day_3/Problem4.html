@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureBank Dashboard</title>
+    <link rel="stylesheet" href="style4.css">
+    <style>
+        .account-card.balance-highlight {
+            background-color: #e0f7fa;
+            border: 2px solid #00acc1;
+        }
+    </style>
+</head>
+<body>
+
+<div style="background-color: #ffcc00; color: #333; padding: 10px; text-align:center;">
+    Warning: Your session will expire in 5 minutes!
+</div>
+
+<header>
+    <h1>SecureBank Dashboard</h1>
+</header>
+
+<div class="container">
+    <aside class="sidebar">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Accounts</a></li>
+            <li><a href="#">Transfers</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <section class="account-summary">
+            <div class="account-card balance-highlight">
+                <h3>Checking Account</h3>
+                <p>Balance: $5,000</p>
+            </div>
+            <div class="account-card">
+                <h3>Savings Account</h3>
+                <p>Balance: $12,500</p>
+            </div>
+            <div class="account-card">
+                <h3>Credit Card</h3>
+                <p>Balance: $2,300</p>
+            </div>
+        </section>
+
+        <section class="transactions">
+            <h2>Recent Transactions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>20-Feb-2026</td>
+                        <td>Salary Credit</td>
+                        <td>Credit</td>
+                        <td>$3,000</td>
+                    </tr>
+                    <tr>
+                        <td>19-Feb-2026</td>
+                        <td>Grocery Shopping</td>
+                        <td>Debit</td>
+                        <td>$150</td>
+                    </tr>
+                    <tr>
+                        <td>18-Feb-2026</td>
+                        <td>Electricity Bill</td>
+                        <td>Debit</td>
+                        <td>$75</td>
+                    </tr>
+                    <tr>
+                        <td>17-Feb-2026</td>
+                        <td>Interest Credit</td>
+                        <td>Credit</td>
+                        <td>$50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="login-section">
+            <h2>Login Form</h2>
+            <form>
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username"><br><br>
+
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password"><br><br>
+
+                <button type="submit">Login</button>
+            </form>
+        </section>
+    </main>
+</div>
+
+<footer>
+    <p>&copy; 2026 SecureBank. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
