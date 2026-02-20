@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+header nav ul {
+    list-style-type: none;
+}
+header nav ul li:first-child a {
+    font-weight: bold; /* pseudo-class example */
+}
+header nav ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+header nav a {
+    color: white;
+    text-decoration: none;
+}
+header nav a:hover {
+    color: #ffcc00; /* pseudo-class hover */
+}
+
+#hero {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #cce6ff;
+}
+#hero button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+#hero button:hover {
+    background-color: #0056b3;
+}
+
+.course-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+.course {
+    border: 2px solid #007bff; /* box model border */
+    padding: 20px; /* box model padding */
+    margin: 10px; /* box model margin */
+    width: 30%; /* fixed width */
+    border-radius: 10px;
+    background-color: #e6f2ff;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.course > h3 {
+    color: #004080;
+}
+
+h3 + p {
+    color: #333;
+}
+
+.course:hover {
+    transform: scale(1.05);
+    background-color: #cce6ff;
+}
+
+#first-course {
+    background-color: #3f969a64;
+}
+#last-course {
+    background-color: #b0afb7b7;
+}
+
+#testimonials {
+    padding: 20px;
+    background-color: #f0f8ff;
+    margin: 20px 0;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #004080;
+    color: white;
+}
