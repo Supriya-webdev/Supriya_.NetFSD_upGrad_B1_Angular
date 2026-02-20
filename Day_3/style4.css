@@ -1,0 +1,98 @@
+h1, h2, h3, p, table {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 20%;
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+}
+.sidebar ul {
+    list-style: none;
+}
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+.sidebar ul li a:hover {
+    color: #ffcc00; /* pseudo-class hover */
+}
+
+main {
+    width: 80%;
+    padding: 20px;
+}
+
+.account-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.account-card {
+    border: 2px solid #00acc1;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 30%;
+    box-sizing: border-box; /* box model */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+tr:hover {
+    background-color: #e0f7fa;
+}
+tr td:nth-child(3) {
+    font-weight: bold;
+}
+tr td:nth-child(3):contains("Debit") {
+    color: red;
+}
+tr td:nth-child(3):contains("Credit") {
+    color: green;
+}
+
+.login-section input[type="password"] {
+    padding: 8px;
+    width: 50%;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* attribute selector */
+}
+.login-section button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+.login-section button:active {
+    background-color: #0056b3; /* pseudo-class active */
+}
+
+footer {
+    background-color: #004080;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+h1, h2, h3 {
+    color: #004080;
+}
