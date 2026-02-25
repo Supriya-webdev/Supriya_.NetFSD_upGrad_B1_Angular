@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Book Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    button {
+      margin: 5px 0;
+      padding: 5px 10px;
+    }
+    .book-list, .invoice {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #333;
+      max-width: 500px;
+    }
+    input[type="number"] {
+      width: 60px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Online Book Store</h1>
+
+  <div>
+    <button onclick="displayTitles()">Show All Book Titles</button><br>
+    <button onclick="totalInventoryValue()">Total Inventory Value</button><br>
+    <button onclick="booksAbove500()">Books Above ₹500</button><br>
+    <button onclick="increasePrice()">Increase Price by 5%</button><br>
+    <button onclick="sortByPrice()">Sort Books by Price</button><br>
+    <input type="number" id="removeId" placeholder="Book ID">
+    <button onclick="removeBook()">Remove Book by ID</button><br>
+    <button onclick="checkOutOfStock()">Check Out of Stock</button><br>
+    <button onclick="applyDiscount()">Apply Discount (> ₹600)</button><br>
+    <button onclick="generateInvoice()">Generate Invoice</button>
+  </div>
+
+  <h2>Output:</h2>
+  <div id="output" class="book-list"></div>
+
+  <script>
+    let books = [
+      { id: 1, title: "JavaScript Basics", price: 450, stock: 10 },
+      { id: 2, title: "React Guide", price: 650, stock: 5 },
+      { id: 3, title: "Node.js Mastery", price: 550, stock: 8 },
+      { id: 4, title: "CSS Complete", price: 300, stock: 12 }
+    ];
+
+    const output = document.getElementById("output");
+
+    function displayTitles() {
+      let titles = books.map(b => b.title).join(", ");
+      output.innerHTML = `<strong>Book Titles:</strong> ${titles}`;
+    }
+
+    function totalInventoryValue() {
+      let total = books.reduce((sum, b) => sum + (b.price * b.stock), 0);
+      output.innerHTML = `<strong>Total Inventory Value:</strong> ₹${total}`;
+    }
+
+    function booksAbove500() {
+      let filtered = books.filter(b => b.price > 500);
+      if (filtered.length === 0) {
+        output.innerHTML = "No books above ₹500.";
+        return;
+      }
+      let html = "<strong>Books Above ₹500:</strong><ul>";
+      filtered.forEach(b => html += `<li>${b.title}: ₹${b.price}</li>`);
+      html += "</ul>";
+      output.innerHTML = html;
+    }
+
+    function increasePrice() {
+      books = books.map(b => ({ ...b, price: Math.round(b.price * 1.05) }));
+      displayBooks();
+    }
+
+    function sortByPrice() {
+      books.sort((a, b) => a.price - b.price);
+      displayBooks();
+    }
+
+    function removeBook() {
+      let id = parseInt(document.getElementById("removeId").value);
+      if (isNaN(id)) {
+        output.innerHTML = "Please enter a valid ID.";
+        return;
+      }
+      books = books.filter(b => b.id !== id);
+      displayBooks();
+    }
+
+    function checkOutOfStock() {
+      let outOfStock = books.some(b => b.stock === 0);
+      output.innerHTML = outOfStock ? "Some books are out of stock!" : "No books are out of stock.";
+    }
+
+    function applyDiscount() {
+      books = books.map(b => b.price > 600 ? { ...b, price: Math.round(b.price * 0.9) } : b);
+      displayBooks();
+    }
+
+    function generateInvoice() {
+      let invoice = books.map(b => `${b.title}: ₹${b.price} x ${b.stock}`).join("<br>");
+      output.innerHTML = `<strong>Invoice:</strong><br>${invoice}`;
+    }
+
+    function displayBooks() {
+      let html = "<ul>";
+      books.forEach(b => html += `<li>${b.id}. ${b.title} - ₹${b.price} (Stock: ${b.stock})</li>`);
+      html += "</ul>";
+      output.innerHTML = html;
+    }
+
+    displayBooks();
+  </script>
+</body>
+</html>
