@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Profile Manager</title>
+  <style>
+    #studentProfile {
+      border: 2px solid #00796b;
+      padding: 15px;
+      width: 250px;
+      margin-top: 10px;
+      font-family: Arial, sans-serif;
+      background-color: #e0f2f1;
+    }
+    input {
+      width: 100px;
+      padding: 5px;
+      margin-top: 10px;
+    }
+    button {
+      padding: 5px 10px;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dynamic Student Profile Manager</h1>
+
+  <label>Update Marks: </label>
+  <input type="number" id="marksInput" placeholder="Enter marks">
+  <button id="updateBtn">Update</button>
+
+  <div id="studentProfile"></div>
+
+  <script>
+    const student = {
+      name: "Rahul",
+      rollNo: 101,
+      marks: 85
+    };
+
+    function updateStudentProfile(studentObj) {
+      const profileDiv = document.getElementById("studentProfile");
+      profileDiv.innerHTML = `
+        <p><strong>Name:</strong> ${studentObj.name}</p>
+        <p><strong>Roll No:</strong> ${studentObj.rollNo}</p>
+        <p><strong>Marks:</strong> ${studentObj.marks}</p>
+      `;
+    }
+
+    function updateMarks(newMarks) {
+      student.marks = newMarks;           
+      updateStudentProfile(student);      
+    }
+
+    updateStudentProfile(student);
+
+    document.getElementById("updateBtn").addEventListener("click", function() {
+      const newMarks = parseInt(document.getElementById("marksInput").value);
+      if (!isNaN(newMarks)) {
+        updateMarks(newMarks);
+      } else {
+        alert("Please enter a valid number for marks.");
+      }
+    });
+  </script>
+</body>
+</html>
