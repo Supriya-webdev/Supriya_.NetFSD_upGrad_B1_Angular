@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Expense Tracker</title>
+  <style>
+    input {
+      padding: 5px;
+      margin: 5px 0;
+      width: 200px;
+    }
+    button {
+      padding: 5px 10px;
+      margin-right: 5px;
+      margin-top: 10px;
+    }
+    table {
+      margin-top: 15px;
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 500px;
+    }
+    table, th, td {
+      border: 1px solid #333;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mini Expense Tracker</h1>
+
+  <label>Expense Title:</label>
+  <input type="text" id="title" placeholder="Enter title"><br>
+  <label>Amount:</label>
+  <input type="number" id="amount" placeholder="Enter amount"><br>
+  <label>Date:</label>
+  <input type="date" id="date"><br>
+
+  <button onclick="addExpense()">Add Expense</button>
+  <button onclick="viewExpenses()">View Expenses</button>
+  <button onclick="deleteAllExpenses()">Delete All Expenses</button>
+
+  <p id="statusMsg"></p>
+
+  <div id="expenseList"></div>
+
+  <script>
+    const db = openDatabase("ExpenseDB", "1.0", "Mini Expense Tracker DB", 2 * 1024 * 1024);
+
+    db.transaction(function(tx) {
+      tx.executeSql(
+        "CREATE TABLE IF NOT EXISTS expenses (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, amount REAL, date TEXT)",
+        [],
+        function() { console.log("Table created successfully."); },
+        function(tx, error) { console.log("Error creating table: " + error.message); }
+      );
+    });
+
+    function addExpense() {
+      const title = document.getElementById("title").value.trim();
+      const amount = parseFloat(document.getElementById("amount").value);
+      const date = document.getElementById("date").value;
+
+      const status = document.getElementById("statusMsg");
+
+      if (!title || isNaN(amount) || !date) {
+        status.innerText = "Please fill all fields correctly.";
+        status.className = "error";
+        return;
+      }
+
+      db.transaction(function(tx) {
+        tx.executeSql(
+          "INSERT INTO expenses (title, amount, date) VALUES (?, ?, ?)",
+          [title, amount, date],
+          function(tx, result) {
+            status.innerText = "Expense added successfully!";
+            status.className = "";
+            document.getElementById("title").value = "";
+            document.getElementById("amount").value = "";
+            document.getElementById("date").value = "";
+            viewExpenses(); 
+          },
+          function(tx, error) {
+            status.innerText = "Error adding expense: " + error.message;
+            status.className = "error";
+          }
+        );
+      });
+    }
+
+    function viewExpenses() {
+      db.transaction(function(tx) {
+        tx.executeSql(
+          "SELECT * FROM expenses ORDER BY date DESC",
+          [],
+          function(tx, results) {
+            const len = results.rows.length;
+            let html = "<table><tr><th>Title</th><th>Amount</th><th>Date</th></tr>";
+            for (let i = 0; i < len; i++) {
+              const row = results.rows.item(i);
+              html += `<tr><td>${row.title}</td><td>${row.amount}</td><td>${row.date}</td></tr>`;
+            }
+            html += "</table>";
+            document.getElementById("expenseList").innerHTML = html;
+          },
+          function(tx, error) {
+            document.getElementById("statusMsg").innerText = "Error fetching expenses: " + error.message;
+            document.getElementById("statusMsg").className = "error";
+          }
+        );
+      });
+    }
+
+    function deleteAllExpenses() {
+      if (!confirm("Are you sure you want to delete all expenses?")) return;
+
+      db.transaction(function(tx) {
+        tx.executeSql(
+          "DELETE FROM expenses",
+          [],
+          function(tx, result) {
+            document.getElementById("statusMsg").innerText = "All expenses deleted!";
+            document.getElementById("statusMsg").className = "";
+            document.getElementById("expenseList").innerHTML = "";
+          },
+          function(tx, error) {
+            document.getElementById("statusMsg").innerText = "Error deleting expenses: " + error.message;
+            document.getElementById("statusMsg").className = "error";
+          }
+        );
+      });
+    }
+
+    window.onload = viewExpenses;
+  </script>
+</body>
+</html>
