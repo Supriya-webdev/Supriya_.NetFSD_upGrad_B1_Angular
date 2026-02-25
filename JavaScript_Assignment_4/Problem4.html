@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Payroll System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    button {
+      margin: 5px 0;
+      padding: 5px 10px;
+    }
+    .output {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #333;
+      max-width: 700px;
+      overflow-x: auto;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+    }
+    table, th, td {
+      border: 1px solid #333;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>Employee Payroll System</h1>
+
+  <div>
+    <button onclick="totalSalary()">Total Salary Expense</button><br>
+    <button onclick="highestLowest()">Highest & Lowest Paid Employee</button><br>
+    <button onclick="increaseIT()">Increase IT Salary by 15%</button><br>
+    <button onclick="groupByDept()">Group Employees by Department</button><br>
+    <button onclick="avgSalaryDept()">Department-wise Average Salary</button><br>
+    <button onclick="sortBySalary()">Sort Employees by Salary Descending</button><br>
+    <button onclick="applyTax()">Apply 10% Tax Deduction</button><br>
+    <button onclick="aboveAverage()">Employees Earning Above Average Salary</button><br>
+    <button onclick="displayTable()">Display Employee Table</button><br>
+  </div>
+
+  <h2>Output:</h2>
+  <div id="output" class="output"></div>
+
+  <script>
+    let employees = [
+      { id:1, name:"Ravi", dept:"IT", salary:70000 },
+      { id:2, name:"Anita", dept:"HR", salary:50000 },
+      { id:3, name:"Karan", dept:"IT", salary:80000 },
+      { id:4, name:"Meena", dept:"Finance", salary:60000 }
+    ];
+
+    const output = document.getElementById("output");
+
+    function displayEmployees(list = employees) {
+      let html = "<ul>" + list.map(e => `<li>${e.name} (${e.dept}) - ₹${e.salary}</li>`).join("") + "</ul>";
+      output.innerHTML = html;
+    }
+
+    function totalSalary() {
+      let total = employees.reduce((sum, e) => sum + e.salary, 0);
+      output.innerHTML = `<strong>Total Salary Expense:</strong> ₹${total}`;
+    }
+
+    function highestLowest() {
+      let highest = employees.reduce((max, e) => e.salary > max.salary ? e : max, employees[0]);
+      let lowest = employees.reduce((min, e) => e.salary < min.salary ? e : min, employees[0]);
+      output.innerHTML = `<strong>Highest Paid:</strong> ${highest.name} - ₹${highest.salary}<br>
+                          <strong>Lowest Paid:</strong> ${lowest.name} - ₹${lowest.salary}`;
+    }
+
+    function increaseIT() {
+      employees = employees.map(e => e.dept === "IT" ? { ...e, salary: Math.round(e.salary * 1.15) } : e);
+      displayEmployees();
+    }
+
+    function groupByDept() {
+      let grouped = {};
+      employees.forEach(e => {
+        if (!grouped[e.dept]) grouped[e.dept] = [];
+        grouped[e.dept].push(e);
+      });
+      let html = "";
+      for (let dept in grouped) {
+        html += `<strong>${dept} Department:</strong><ul>` +
+          grouped[dept].map(e => `<li>${e.name} - ₹${e.salary}</li>`).join("") + "</ul>";
+      }
+      output.innerHTML = html;
+    }
+
+    function avgSalaryDept() {
+      let grouped = {};
+      employees.forEach(e => {
+        if (!grouped[e.dept]) grouped[e.dept] = [];
+        grouped[e.dept].push(e.salary);
+      });
+      let html = "<strong>Department-wise Average Salary:</strong><ul>";
+      for (let dept in grouped) {
+        let avg = grouped[dept].reduce((sum, sal) => sum + sal, 0) / grouped[dept].length;
+        html += `<li>${dept}: ₹${avg.toFixed(2)}</li>`;
+      }
+      html += "</ul>";
+      output.innerHTML = html;
+    }
+
+    function sortBySalary() {
+      let sorted = [...employees].sort((a, b) => b.salary - a.salary);
+      displayEmployees(sorted);
+    }
+
+    function applyTax() {
+      employees = employees.map(e => ({ ...e, salary: Math.round(e.salary * 0.9) }));
+      displayEmployees();
+    }
+
+    function aboveAverage() {
+      let avg = employees.reduce((sum, e) => sum + e.salary, 0) / employees.length;
+      let above = employees.filter(e => e.salary > avg);
+      output.innerHTML = "<strong>Employees earning above average salary:</strong><ul>" +
+        above.map(e => `<li>${e.name} (${e.dept}) - ₹${e.salary}</li>`).join("") + "</ul>";
+    }
+
+    function displayTable() {
+      let html = "<table><tr><th>ID</th><th>Name</th><th>Dept</th><th>Salary</th></tr>" +
+        employees.map(e => `<tr><td>${e.id}</td><td>${e.name}</td><td>${e.dept}</td><td>₹${e.salary}</td></tr>`).join("") +
+        "</table>";
+      output.innerHTML = html;
+    }
+
+    displayEmployees();
+  </script>
+</body>
+</html>
