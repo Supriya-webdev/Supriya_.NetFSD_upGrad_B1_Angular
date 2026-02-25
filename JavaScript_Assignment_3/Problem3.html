@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location-Based Weather Logger</title>
+  <style>
+    button {
+      padding: 5px 10px;
+      margin: 10px 0;
+    }
+    .location-entry {
+      margin: 5px 0;
+      padding: 5px;
+      border: 1px solid #333;
+      width: fit-content;
+      font-family: Arial, sans-serif;
+    }
+    #history {
+      margin-top: 10px;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Location-Based Weather Logger</h1>
+
+  <button onclick="getMyLocation()">Get My Location</button>
+  <p id="statusMsg"></p>
+
+  <h2>Last 5 Locations</h2>
+  <div id="history"></div>
+
+  <script>
+    const STORAGE_KEY = "locationHistory";
+
+    function displayHistory() {
+      const historyDiv = document.getElementById("history");
+      historyDiv.innerHTML = ""; // Clear previous
+
+      let locations = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+      locations.forEach((loc, index) => {
+        const div = document.createElement("div");
+        div.className = "location-entry";
+        div.innerText = `${index + 1}. Latitude: ${loc.latitude}, Longitude: ${loc.longitude}, Time: ${loc.time}`;
+        historyDiv.appendChild(div);
+      });
+    }
+
+    function getMyLocation() {
+      const status = document.getElementById("statusMsg");
+      if (!navigator.geolocation) {
+        status.innerText = "Geolocation is not supported by your browser.";
+        status.className = "error";
+        return;
+      }
+
+      status.innerText = "Fetching location...";
+      status.className = "";
+
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          const latitude = position.coords.latitude.toFixed(6);
+          const longitude = position.coords.longitude.toFixed(6);
+          const time = new Date().toLocaleString();
+
+          status.innerText = `Latitude: ${latitude}, Longitude: ${longitude}`;
+
+          let locations = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+          locations.unshift({ latitude, longitude, time });
+
+          if (locations.length > 5) {
+            locations = locations.slice(0, 5);
+          }
+
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(locations));
+
+          displayHistory();
+        },
+
+        function(error) {
+          switch(error.code) {
+            case error.PERMISSION_DENIED:
+              status.innerText = "Permission denied. Please allow location access.";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              status.innerText = "Location unavailable.";
+              break;
+            case error.TIMEOUT:
+              status.innerText = "Location request timed out.";
+              break;
+            default:
+              status.innerText = "An unknown error occurred.";
+              break;
+          }
+          status.className = "error";
+        },
+        { timeout: 10000 } 
+      );
+    }
+
+    window.onload = displayHistory;
+  </script>
+</body>
+</html>
