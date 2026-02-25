@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Cleaning & Analytics</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    button {
+      margin: 5px 0;
+      padding: 5px 10px;
+    }
+    .output {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #333;
+      max-width: 700px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Data Cleaning & Analytics</h1>
+
+  <div>
+    <button onclick="removeDuplicates()">Remove Duplicates</button><br>
+    <button onclick="secondLargest()">Second Largest Number</button><br>
+    <button onclick="frequencyCount()">Frequency of Each Element</button><br>
+    <button onclick="firstNonRepeating()">First Non-Repeating Number</button><br>
+    <button onclick="rotateArray()">Rotate Array by 2 Positions</button><br>
+    <button onclick="flattenArray()">Flatten Nested Array</button><br>
+    <button onclick="findMissingNumber()">Find Missing Number</button><br>
+  </div>
+
+  <h2>Output:</h2>
+  <div id="output" class="output"></div>
+
+  <script>
+    let numbers = [10, 20, 30, 10, 40, 20, 50, 60, 60];
+    const nestedArray = [1, 2, [3, 4, [5]]];
+    const missingArr = [1, 2, 3, 5, 6];
+    const output = document.getElementById("output");
+
+    function removeDuplicates() {
+      let unique = [...new Set(numbers)];
+      output.innerText = `Original: ${numbers}\nAfter Removing Duplicates: ${unique}`;
+    }
+
+    function secondLargest() {
+      let sorted = [...new Set(numbers)].sort((a, b) => b - a);
+      output.innerText = `Second Largest Number: ${sorted[1]}`;
+    }
+
+    function frequencyCount() {
+      let freq = numbers.reduce((acc, num) => {
+        acc[num] = (acc[num] || 0) + 1;
+        return acc;
+      }, {});
+      let result = Object.entries(freq).map(([num, count]) => `${num}: ${count}`).join("\n");
+      output.innerText = `Frequency of Each Element:\n${result}`;
+    }
+
+    function firstNonRepeating() {
+      let freq = numbers.reduce((acc, num) => {
+        acc[num] = (acc[num] || 0) + 1;
+        return acc;
+      }, {});
+      let firstNonRepeat = numbers.find(num => freq[num] === 1);
+      output.innerText = `First Non-Repeating Number: ${firstNonRepeat}`;
+    }
+
+    function rotateArray() {
+      let rotated = numbers.slice(2).concat(numbers.slice(0, 2));
+      output.innerText = `Original Array: ${numbers}\nRotated by 2: ${rotated}`;
+    }
+
+    function flattenArray() {
+      function flatten(arr) {
+        return arr.reduce((acc, val) => Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val), []);
+      }
+      let flat = flatten(nestedArray);
+      output.innerText = `Nested Array: ${JSON.stringify(nestedArray)}\nFlattened: ${flat}`;
+    }
+
+    function findMissingNumber() {
+      let n = Math.max(...missingArr);
+      let full = Array.from({ length: n }, (_, i) => i + 1);
+      let missing = full.filter(num => !missingArr.includes(num));
+      output.innerText = `Array: ${missingArr}\nMissing Number(s): ${missing}`;
+    }
+
+  </script>
+</body>
+</html>
