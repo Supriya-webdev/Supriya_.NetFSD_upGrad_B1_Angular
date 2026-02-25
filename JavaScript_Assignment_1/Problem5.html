@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Analysis Tool</title>
+</head>
+<body>
+  <script>
+    let number = 7; 
+
+    let posNeg = (number >= 0) ? "Positive" : "Negative";
+    console.log("The number is:", posNeg);
+
+    if (number % 2 === 0) {
+      console.log("The number is Even");
+    } else {
+      console.log("The number is Odd");
+    }
+
+    console.log("Numbers from 1 to", number + ":");
+    for (let i = 1; i <= number; i++) {
+      console.log(i);
+    }
+  </script>
+</body>
+</html>
