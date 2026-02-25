@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Form Validation</title>
+  <style>
+    input {
+      display: block;
+      margin-bottom: 5px;
+      padding: 5px;
+      width: 250px;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+    .success {
+      color: green;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Registration Form</h1>
+
+  <label>Name:</label>
+  <input type="text" id="name" onchange="validateName()">
+  <span id="nameMsg" class="error"></span>
+
+  <label>Email:</label>
+  <input type="email" id="email" onchange="validateEmail()">
+  <span id="emailMsg" class="error"></span>
+
+  <label>Age:</label>
+  <input type="number" id="age" onchange="validateAge()">
+  <span id="ageMsg" class="error"></span>
+
+  <button onclick="submitForm()">Submit</button>
+  <p id="statusMsg"></p>
+
+  <script>
+    function validateName() {
+      const name = document.getElementById("name").value.trim();
+      const msg = document.getElementById("nameMsg");
+      if (name === "") {
+        msg.innerText = "Name cannot be empty";
+        return false;
+      } else {
+        msg.innerText = "";
+        return true;
+      }
+    }
+
+    function validateEmail() {
+      const email = document.getElementById("email").value.trim();
+      const msg = document.getElementById("emailMsg");
+      if (!email.includes("@")) {
+        msg.innerText = "Email must contain @";
+        return false;
+      } else {
+        msg.innerText = "";
+        return true;
+      }
+    }
+
+    function validateAge() {
+      const age = parseInt(document.getElementById("age").value);
+      const msg = document.getElementById("ageMsg");
+      if (isNaN(age) || age <= 18) {
+        msg.innerText = "Age must be greater than 18";
+        return false;
+      } else {
+        msg.innerText = "";
+        return true;
+      }
+    }
+
+    function submitForm() {
+      const validName = validateName();
+      const validEmail = validateEmail();
+      const validAge = validateAge();
+
+      const status = document.getElementById("statusMsg");
+
+      if (validName && validEmail && validAge) {
+        const userData = {
+          name: document.getElementById("name").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          age: document.getElementById("age").value
+        };
+        sessionStorage.setItem("userData", JSON.stringify(userData));
+        status.innerText = "User data saved successfully!";
+        status.className = "success";
+      } else {
+        status.innerText = "Please correct the errors above.";
+        status.className = "error";
+      }
+    }
+  </script>
+</body>
+</html>
